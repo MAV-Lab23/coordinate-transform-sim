@@ -98,14 +98,14 @@ def plot(droneState, ground_height, points, image_fov, point_line_length=6.2, ca
 
         line_opti = direction_vector_opti * camera_line_length
 
-
-        ax.plot([droneState.x, droneState.x + line_opti[0]], [droneState.y, droneState.y + line_opti[1]],
-                [droneState.z, droneState.z + line_opti[2]],
-                color='black')
+        if idx != 0:
+            ax.plot([droneState.x, droneState.x + line_opti[0]], [droneState.y, droneState.y + line_opti[1]],
+                    [droneState.z, droneState.z + line_opti[2]],
+                    color='black', alpha=0.5)
         if prev_endpoint is not None:
             ax.plot([droneState.x + prev_endpoint[0], droneState.x + line_opti[0]],
                     [droneState.y + prev_endpoint[1], droneState.y + line_opti[1]],
-                    [droneState.z + prev_endpoint[2], droneState.z + line_opti[2]], color='black')
+                    [droneState.z + prev_endpoint[2], droneState.z + line_opti[2]], color='black', alpha=0.5)
 
         prev_endpoint = line_opti
 
@@ -164,17 +164,17 @@ def plot(droneState, ground_height, points, image_fov, point_line_length=6.2, ca
     ax.view_init(elev=15, azim=-122, roll=0)
 
 
-    ax.set_zticks([0, -1, -2])
+    ax.set_zticks([0, -.75, -1.5])
 
     #set axis ranges
     ax.set_xlim(-3.2, 3.2)
     ax.set_ylim(-3.2, 3.2)
-    ax.set_zlim(-2, .1)
+    ax.set_zlim(-1.5, .1)
 
     ax.invert_zaxis()
     ax.invert_yaxis()
 
-    ax.legend(fontsize=fs, bbox_to_anchor=(.6, .8), loc='upper left')
+    ax.legend(fontsize=fs, bbox_to_anchor=(.65, .75), loc='upper left')
 
     #equal axis scale
     ax.set_aspect('equal')
